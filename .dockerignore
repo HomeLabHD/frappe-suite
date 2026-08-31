@@ -1,0 +1,8 @@
+# The build context is frappe_docker/, not this directory — apps.json reaches the
+# build as a secret. Keep repo metadata out regardless.
+.git
+.gitmodules
+.gitlab-ci.yml
+.stagefreight
+docs
+README.md

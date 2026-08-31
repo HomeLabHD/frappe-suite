@@ -1,0 +1,67 @@
+# frappe-bench
+
+A Frappe **bench** image: the framework plus the apps we run on it.
+
+Named for the platform rather than the payload — the apps in it are expected to change,
+and `apps.json` is the only place that says which are present.
+
+## Apps
+
+| app | why |
+|-----|-----|
+| `frappe` | the framework itself; implied by the build, not listed |
+| `erpnext` | ERP, and CRM — lead → opportunity → quotation → customer is native to it |
+| `hrms` | HR. Split out of ERPNext at v14, so it is absent from the stock image |
+| `helpdesk` | ticketing |
+| `telephony` | a helpdesk dependency, not a product choice |
+
+Every app is pinned to `version-15` except `helpdesk`, which releases from `main`.
+A v15 app cannot run on a v16 framework, so the whole set moves together or not at all.
+
+## Baked ≠ installed
+
+An app in this image is inert until a site installs it:
+
+```sh
+bench --site <site> install-app hrms
+```
+
+So an unused app costs image size and build time, not runtime surface — no tables, no
+routes, no scheduler jobs. Add one by adding a line here and rebuilding; that is cheap
+enough that speculative apps are not worth their disk.
+
+## Build
+
+Built from frappe_docker's layered `images/custom/Containerfile`, which takes the app set
+as base64 so a single image carries the whole bench:
+
+```sh
+export APPS_JSON_BASE64=$(base64 -w 0 apps.json)
+```
+
+The heavy part is the node/yarn asset build, one pass per app with a UI.
+
+## How it is built
+
+`frappe_docker` is a **pinned submodule**, not a vendored copy: upstream owns the build
+recipe, this repo owns the app set, and neither can drift into the other. The pin is
+visible in git, and moving it is a reviewable commit.
+
+```sh
+git submodule update --init                 # once, and in CI
+```
+
+`apps.json` reaches the build as a **secret**, which is how the current Containerfile
+takes it — the `APPS_JSON_BASE64` form most guides still show was removed upstream.
+
+Three build args are set deliberately:
+
+| arg | why |
+|-----|-----|
+| `FRAPPE_BRANCH=version-15` | the Containerfile defaults to `version-16`, and a v15 app cannot run on a v16 framework |
+| `PYTHON_VERSION`, `NODE_VERSION` | pinned exactly; a build that floats its interpreter is not reproducible whatever else it pins |
+
+### CI must fetch the submodule
+
+A pipeline that clones without submodules gets an empty `frappe_docker/`, and the build
+fails on a missing Containerfile rather than on anything to do with this repo.

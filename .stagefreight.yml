@@ -1,0 +1,31 @@
+version: 1
+
+vars:
+  org: prplanit
+  repo: frappe-bench
+  gitlab_group: PrPlanIT
+  github_org: PrPlanIT
+  github_repo: frappe-bench
+
+builds:
+  image:
+    kind: docker
+    # Upstream owns the build recipe; this repo owns the app set. frappe_docker is a
+    # pinned submodule rather than a vendored copy, so the recipe cannot drift from the
+    # project that maintains it, and the version it is pinned to is visible in git.
+    dockerfile: frappe_docker/images/custom/Containerfile
+    context: frappe_docker
+    platforms: [linux/amd64]
+    secrets:
+      # The Containerfile mounts the app list for a single RUN. It is not a build arg:
+      # the older APPS_JSON_BASE64 form that most guides still show is gone upstream.
+      apps_json: apps.json
+    build_args:
+      # The Containerfile defaults this to version-16, and a v15 app cannot run on a
+      # v16 framework. Every app in apps.json is v15, so the framework must match.
+      FRAPPE_BRANCH: version-15
+      # The toolchain pinned exactly, like everything else here: the Containerfile
+      # defaults to the v16 pairing, and a build that floats its interpreter is not
+      # reproducible whatever else it pins.
+      PYTHON_VERSION: "3.12.12"
+      NODE_VERSION: "22.22.0"
