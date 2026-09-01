@@ -1,5 +1,8 @@
 # frappe-suite
 
+A Frappe container image with ERPNext, HR, and Helpdesk baked in — a drop-in replacement
+for `frappe/erpnext` that carries the whole set.
+
 <!-- sf:project:start -->
 [![GitHub](https://img.shields.io/badge/GitHub-mirror-181717?logo=github)](https://github.com/HomeLabHD/frappe-suite) [![GitLab](https://img.shields.io/badge/GitLab-source-FC6D26?logo=gitlab)](https://gitlab.prplanit.com/HomeLabHD/frappe-suite) [![license](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/license.svg)](https://github.com/HomeLabHD/frappe-suite/blob/main/LICENSE) [![Open Issues](https://img.shields.io/github/issues/HomeLabHD/frappe-suite)](https://github.com/HomeLabHD/frappe-suite/issues) [![Open PRs](https://img.shields.io/github/issues-pr/HomeLabHD/frappe-suite)](https://github.com/HomeLabHD/frappe-suite/pulls) [![Contributors](https://img.shields.io/github/contributors/HomeLabHD/frappe-suite)](https://github.com/HomeLabHD/frappe-suite/graphs/contributors) [![donate](https://img.shields.io/badge/donate-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/T6T41IT163) [![sponsor](https://img.shields.io/badge/sponsor-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/HomeLabHD)
 <!-- sf:project:end -->
@@ -15,63 +18,58 @@
 [![python 3.14.2](https://img.shields.io/badge/python-3.14.2-0078D4?style=flat)](https://hub.docker.com/_/python)
 <!-- sf:contents-base:end -->
 
-A Frappe application **suite**: the framework plus the business apps we run on it.
+> Not [frappe/suite](https://github.com/frappe/suite), Frappe's experimental productivity
+> tools.
 
-Named for the platform rather than the payload — the apps in it are expected to change,
-and `apps.json` is the only place that says which are present. Not `bench`, which upstream
-already publishes as a development container, and not `framework`, which is the framework
-alone without any of the apps below.
+## What's inside
 
-## Apps
-
-| app | why |
-|-----|-----|
-| `frappe` | the framework itself; implied by the build, not listed |
-| `erpnext` | ERP, and CRM — lead → opportunity → quotation → customer is native to it |
-| `hrms` | HR. Split out of ERPNext at v14, so it is absent from the stock image |
+| app | what it gives you |
+|-----|-------------------|
+| `frappe` | the framework the rest runs on |
+| `erpnext` | ERP and CRM — lead → opportunity → quotation → customer |
+| `hrms` | HR: employees, leave, attendance, payroll |
 | `helpdesk` | ticketing |
-| `telephony` | Exotel/Twilio integration. Not a product choice — `helpdesk` declares it in `required_apps`, so it arrives whether or not any call ever routes through it |
+| `telephony` | Exotel/Twilio call integration; `helpdesk` requires it |
 
-`erpnext` and `hrms` are pinned to `version-15`. `helpdesk` and `telephony` cut no
-version branches at all — upstream releases them from `main` and `develop` respectively,
-and upstream's own install instructions name those branches.
-A v15 app cannot run on a v16 framework, so the whole set moves together or not at all.
+Built on the **v15** framework line. The apps move as a set — a v15 app cannot run on a
+v16 framework.
 
-## Baked ≠ installed
+## Use it
 
-An app in this image is inert until a site installs it:
+The image goes wherever `frappe/erpnext` would, for every service role — backend,
+frontend, scheduler, worker. In frappe_docker's compose that is two variables:
+
+```sh
+CUSTOM_IMAGE=hlhd/frappe-suite
+CUSTOM_TAG=latest-dev
+```
+
+Or pull it directly:
+
+```sh
+docker pull hlhd/frappe-suite:latest-dev              # Docker Hub
+docker pull ghcr.io/homelabhd/frappe-suite:latest-dev # GHCR
+```
+
+## Installing apps on a site
+
+Being in the image is not being installed. Each site opts in:
 
 ```sh
 bench --site <site> install-app hrms
+bench --site <site> install-app helpdesk
 ```
 
-So an unused app costs image size and build time, not runtime surface — no tables, no
-routes, no scheduler jobs. Add one by adding a line here and rebuilding; that is cheap
-enough that speculative apps are not worth their disk.
+Until then an app adds no tables, no routes, and no scheduler jobs — it is only disk.
 
-## How it is built
+## Building it yourself
 
-`frappe_docker` is a **pinned submodule**, not a vendored copy: upstream owns the build
-recipe, this repo owns the app set, and neither can drift into the other. The pin is
-visible in git, and moving it is a reviewable commit.
+`apps.json` is the app set; the build recipe is upstream's, pinned as a submodule.
 
 ```sh
-git submodule update --init                 # once, and in CI
+git submodule update --init
 ```
 
-Built from frappe_docker's layered `images/custom/Containerfile`. `apps.json` reaches it
-as a **secret**, which is how the current Containerfile takes it — the `APPS_JSON_BASE64`
-form most guides still show was removed upstream. The heavy part is the node/yarn asset
-build, one pass per app with a UI.
+## License
 
-Three build args are set deliberately:
-
-| arg | why |
-|-----|-----|
-| `FRAPPE_BRANCH=version-15` | the Containerfile defaults to `version-16`, and a v15 app cannot run on a v16 framework |
-| `PYTHON_VERSION`, `NODE_VERSION` | pinned exactly; a build that floats its interpreter is not reproducible whatever else it pins |
-
-### CI must fetch the submodule
-
-A pipeline that clones without submodules gets an empty `frappe_docker/`, and the build
-fails on a missing Containerfile rather than on anything to do with this repo.
+GPL-3.0
