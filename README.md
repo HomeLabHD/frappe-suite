@@ -1,5 +1,12 @@
 # frappe-bench
 
+<!-- sf:project:start -->
+<!-- sf:project:end -->
+<!-- sf:badges:start -->
+<!-- sf:badges:end -->
+<!-- sf:image:start -->
+<!-- sf:image:end -->
+
 A Frappe **bench** image: the framework plus the apps we run on it.
 
 Named for the platform rather than the payload — the apps in it are expected to change,
@@ -30,17 +37,6 @@ So an unused app costs image size and build time, not runtime surface — no tab
 routes, no scheduler jobs. Add one by adding a line here and rebuilding; that is cheap
 enough that speculative apps are not worth their disk.
 
-## Build
-
-Built from frappe_docker's layered `images/custom/Containerfile`, which takes the app set
-as base64 so a single image carries the whole bench:
-
-```sh
-export APPS_JSON_BASE64=$(base64 -w 0 apps.json)
-```
-
-The heavy part is the node/yarn asset build, one pass per app with a UI.
-
 ## How it is built
 
 `frappe_docker` is a **pinned submodule**, not a vendored copy: upstream owns the build
@@ -51,8 +47,10 @@ visible in git, and moving it is a reviewable commit.
 git submodule update --init                 # once, and in CI
 ```
 
-`apps.json` reaches the build as a **secret**, which is how the current Containerfile
-takes it — the `APPS_JSON_BASE64` form most guides still show was removed upstream.
+Built from frappe_docker's layered `images/custom/Containerfile`. `apps.json` reaches it
+as a **secret**, which is how the current Containerfile takes it — the `APPS_JSON_BASE64`
+form most guides still show was removed upstream. The heavy part is the node/yarn asset
+build, one pass per app with a UI.
 
 Three build args are set deliberately:
 
