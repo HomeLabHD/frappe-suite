@@ -6,6 +6,8 @@
 <!-- sf:badges:end -->
 <!-- sf:image:start -->
 <!-- sf:image:end -->
+<!-- sf:contents-base:start -->
+<!-- sf:contents-base:end -->
 
 A Frappe application **suite**: the framework plus the business apps we run on it.
 
