@@ -24,9 +24,11 @@ alone without any of the apps below.
 | `erpnext` | ERP, and CRM — lead → opportunity → quotation → customer is native to it |
 | `hrms` | HR. Split out of ERPNext at v14, so it is absent from the stock image |
 | `helpdesk` | ticketing |
-| `telephony` | a helpdesk dependency, not a product choice |
+| `telephony` | Exotel/Twilio integration. Not a product choice — `helpdesk` declares it in `required_apps`, so it arrives whether or not any call ever routes through it |
 
-Every app is pinned to `version-15` except `helpdesk`, which releases from `main`.
+`erpnext` and `hrms` are pinned to `version-15`. `helpdesk` and `telephony` cut no
+version branches at all — upstream releases them from `main` and `develop` respectively,
+and upstream's own install instructions name those branches.
 A v15 app cannot run on a v16 framework, so the whole set moves together or not at all.
 
 ## Baked ≠ installed
