@@ -1,12 +1,18 @@
 # frappe-suite
 
 <!-- sf:project:start -->
+[![GitHub](https://img.shields.io/badge/GitHub-mirror-181717?logo=github)](https://github.com/HomeLabHD/frappe-suite) [![GitLab](https://img.shields.io/badge/GitLab-source-FC6D26?logo=gitlab)](https://gitlab.prplanit.com/HomeLabHD/frappe-suite) [![license](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/license.svg)](https://github.com/HomeLabHD/frappe-suite/blob/main/LICENSE) [![Open Issues](https://img.shields.io/github/issues/HomeLabHD/frappe-suite)](https://github.com/HomeLabHD/frappe-suite/issues) [![Open PRs](https://img.shields.io/github/issues-pr/HomeLabHD/frappe-suite)](https://github.com/HomeLabHD/frappe-suite/pulls) [![Contributors](https://img.shields.io/github/contributors/HomeLabHD/frappe-suite)](https://github.com/HomeLabHD/frappe-suite/graphs/contributors) [![donate](https://img.shields.io/badge/donate-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/T6T41IT163) [![sponsor](https://img.shields.io/badge/sponsor-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/HomeLabHD)
 <!-- sf:project:end -->
 <!-- sf:badges:start -->
+[![release](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/release.svg)](https://github.com/HomeLabHD/frappe-suite/releases) [![build](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/build.svg)](https://gitlab.prplanit.com/HomeLabHD/frappe-suite/-/pipelines) [![Last Commit](https://img.shields.io/github/last-commit/HomeLabHD/frappe-suite)](https://github.com/HomeLabHD/frappe-suite/commits) [![StageFreight](https://img.shields.io/badge/StageFreight-0.10.0--dev+e3ee67e-310937?logo=readthedocs&logoColor=white)](https://stagefreight.prplanit.com)
 <!-- sf:badges:end -->
 <!-- sf:image:start -->
+[![GHCR](https://img.shields.io/badge/GHCR-homelabhd%2Ffrappe--suite-181717?logo=github&logoColor=white)](https://github.com/HomeLabHD/frappe-suite/pkgs/container/frappe-suite) [![Docker](https://img.shields.io/badge/Docker-hlhd%2Ffrappe--suite-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/r/hlhd/frappe-suite) [![pulls](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/pulls.svg)](https://hub.docker.com/r/hlhd/frappe-suite) [![Harbor](https://img.shields.io/badge/Harbor-hlhd%2Ffrappe--suite-60b932)](https://cr.pcfae.com/harbor/projects)
+
+[![latest](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/release-latest.svg)](https://github.com/HomeLabHD/frappe-suite/pkgs/container/frappe-suite) ![updated](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/release-updated.svg) [![size](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/release-size.svg)](https://github.com/HomeLabHD/frappe-suite/pkgs/container/frappe-suite) [![latest-dev](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/dev-latest.svg)](https://github.com/HomeLabHD/frappe-suite/pkgs/container/frappe-suite) ![updated](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/dev-updated.svg) [![size](https://raw.githubusercontent.com/HomeLabHD/frappe-suite/main/.stagefreight/scribe/dev-size.svg)](https://github.com/HomeLabHD/frappe-suite/pkgs/container/frappe-suite)
 <!-- sf:image:end -->
 <!-- sf:contents-base:start -->
+[![python 3.14.2](https://img.shields.io/badge/python-3.14.2-0078D4?style=flat)](https://hub.docker.com/_/python)
 <!-- sf:contents-base:end -->
 
 A Frappe application **suite**: the framework plus the business apps we run on it.
