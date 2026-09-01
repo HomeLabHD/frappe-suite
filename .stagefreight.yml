@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # GENERATED / ENFORCED BY STAGEFREIGHT GOVERNANCE
 # Source repo: PrPlanIT/MaintenancePolicy
-# Source ref: 899e6fd0fdb99178f6a4649f341aa50cc1c14d2c
+# Source ref: 24682b1c2e524cb2bf728b6fd692b3636510d4c4
 # Profile: hlhd-docker
 # This .stagefreight.yml is governed, not purely local.
 # To disable governance, detach from the control repo workflow.
@@ -25,10 +25,42 @@ builds:
 scribe:
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/scribe-docker.yml
 lint:
+  modules:
+    freshness:
+      exclude:
+        - frappe_docker/images/bench/**
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/lint-generic.yml
 security:
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/security.yml
 dependency:
+  ignore:
+    - id: GHSA-28wg-ghj8-5hjv
+      reason: nanoid DoS — docs-site build tool, absent from the image
+      until: "2026-12-01"
+    - id: GHSA-2v37-7h3g-55p8
+      reason: nanoid DoS — docs-site build tool, absent from the image
+      until: "2026-12-01"
+    - id: GHSA-3jxr-9vmj-r5cp
+      reason: brace-expansion DoS — docs-site build tool, absent from the image
+      until: "2026-12-01"
+    - id: GHSA-mh99-v99m-4gvg
+      reason: brace-expansion DoS — docs-site build tool, absent from the image
+      until: "2026-12-01"
+    - id: GHSA-rgw5-rvv9-x895
+      reason: brace-expansion DoS — docs-site build tool, absent from the image
+      until: "2026-12-01"
+    - id: GHSA-52cp-r559-cp3m
+      reason: js-yaml CPU exhaustion — docs-site build tool, parses no untrusted input here
+      until: "2026-12-01"
+    - id: GHSA-5p4m-2wfm-xmqj
+      reason: js-yaml CPU exhaustion — docs-site build tool, parses no untrusted input here
+      until: "2026-12-01"
+    - id: GHSA-fx2h-pf6j-xcff
+      reason: vite dev-server path bypass on Windows — no dev server runs, and CI is linux
+      until: "2026-12-01"
+    - id: GHSA-r28c-9q8g-f849
+      reason: postcss source-map path traversal — docs-site build tool, absent from the image
+      until: "2026-12-01"
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/dependency.yml
 commit:
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/commit.yml
