@@ -1,5 +1,14 @@
 version: 1
 
+ci:
+  forge: [gitlab]
+  image: docker.cr.pcfae.com/prplanit/stagefreight:latest-dev
+
+git:
+  # frappe_docker is a submodule; a clone without it leaves the directory empty and the
+  # build fails on a missing Containerfile rather than on the checkout.
+  submodules: true
+
 vars:
   org: prplanit
   repo: frappe-bench
