@@ -1,33 +1,102 @@
+# ------------------------------------------------------------------------------
+# GENERATED / ENFORCED BY STAGEFREIGHT GOVERNANCE
+# Source repo: PrPlanIT/MaintenancePolicy
+# Source ref: 899e6fd0fdb99178f6a4649f341aa50cc1c14d2c
+# Profile: hlhd-docker
+# This .stagefreight.yml is governed, not purely local.
+# To disable governance, detach from the control repo workflow.
+# Manual changes may be overwritten by reconciliation.
+# ------------------------------------------------------------------------------
+
 version: 1
-
-ci:
-  forge: [gitlab]
-  image: docker.cr.pcfae.com/prplanit/stagefreight:latest-dev
-
-git:
-  # frappe_docker is a submodule; a clone without it leaves the directory empty and the
-  # build fails on a missing Containerfile rather than on the checkout.
-  submodules: true
-
 builds:
   image:
-    kind: docker
-    # Upstream owns the build recipe; this repo owns the app set. frappe_docker is a
-    # pinned submodule rather than a vendored copy, so the recipe cannot drift from the
-    # project that maintains it, and the version it is pinned to is visible in git.
-    dockerfile: frappe_docker/images/custom/Containerfile
-    context: frappe_docker
-    platforms: [linux/amd64]
-    secrets:
-      # The Containerfile mounts the app list for a single RUN. It is not a build arg:
-      # the older APPS_JSON_BASE64 form that most guides still show is gone upstream.
-      apps_json: apps.json
     build_args:
-      # The Containerfile defaults this to version-16, and a v15 app cannot run on a
-      # v16 framework. Every app in apps.json is v15, so the framework must match.
       FRAPPE_BRANCH: version-15
-      # The toolchain pinned exactly, like everything else here: the Containerfile
-      # defaults to the v16 pairing, and a build that floats its interpreter is not
-      # reproducible whatever else it pins.
-      PYTHON_VERSION: "3.12.12"
-      NODE_VERSION: "22.22.0"
+      NODE_VERSION: 22.22.0
+      PYTHON_VERSION: 3.12.12
+    context: frappe_docker
+    dockerfile: frappe_docker/images/custom/Containerfile
+    kind: docker
+    platforms:
+      - linux/amd64
+    secrets:
+      apps_json: apps.json
+scribe:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/scribe-docker.yml
+lint:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/lint-generic.yml
+security:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/security.yml
+dependency:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/dependency.yml
+commit:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/commit.yml
+release:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/release.yml
+manifest:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/manifest.yml
+build_cache:
+  mode: local
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/build_cache.yml
+ci:
+  forge:
+    - gitlab
+  image: docker.cr.pcfae.com/prplanit/stagefreight:latest-dev
+forges:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/forges.yml
+git:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/git.yml
+  submodules: true
+metadata:
+  category: applications
+  description:
+    - ERPNext with HR, CRM, and helpdesk, built as one container image.
+    - Frappe bench image bundling ERPNext, HRMS, telephony, and helpdesk on the v15 framework.
+  license: GPL-3.0
+  org: HomeLabHD
+  title: Frappe Bench
+  topics:
+    - erpnext
+    - frappe
+    - erp
+    - hrms
+    - helpdesk
+    - docker
+orgs:
+  HomeLabHD:
+    aliases:
+      docker: hlhd
+      ghcr: homelabhd
+      github: HomeLabHD
+      handle: hlhd
+    maintainer: HomeLabHD <homelabhelp@gmail.com>
+publish:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/publish-docker.yml
+registries:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/registries.yml
+repos:
+  github-mirror:
+    forge: github
+    project: HomeLabHD/frappe-suite
+    roles:
+      - mirror
+      - publish-origin
+    sync:
+      git: true
+      releases: true
+  primary:
+    branches:
+      default: main
+    forge: gitlab
+    project: HomeLabHD/frappe-suite
+    roles:
+      - primary
+    worktree: .
+stencils:
+  presets:
+    - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-base.yml
+    - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-status.yml
+    - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-docker.yml
+toolchains:
+  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/toolchains.yml
