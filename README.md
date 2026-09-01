@@ -1,4 +1,4 @@
-# frappe-bench
+# frappe-suite
 
 <!-- sf:project:start -->
 <!-- sf:project:end -->
@@ -7,10 +7,12 @@
 <!-- sf:image:start -->
 <!-- sf:image:end -->
 
-A Frappe **bench** image: the framework plus the apps we run on it.
+A Frappe application **suite**: the framework plus the business apps we run on it.
 
 Named for the platform rather than the payload — the apps in it are expected to change,
-and `apps.json` is the only place that says which are present.
+and `apps.json` is the only place that says which are present. Not `bench`, which upstream
+already publishes as a development container, and not `framework`, which is the framework
+alone without any of the apps below.
 
 ## Apps
 
