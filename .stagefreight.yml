@@ -9,13 +9,6 @@ git:
   # build fails on a missing Containerfile rather than on the checkout.
   submodules: true
 
-vars:
-  org: prplanit
-  repo: frappe-bench
-  gitlab_group: PrPlanIT
-  github_org: PrPlanIT
-  github_repo: frappe-bench
-
 builds:
   image:
     kind: docker
