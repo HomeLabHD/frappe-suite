@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # GENERATED / ENFORCED BY STAGEFREIGHT GOVERNANCE
 # Source repo: PrPlanIT/MaintenancePolicy
-# Source ref: 24682b1c2e524cb2bf728b6fd692b3636510d4c4
+# Source ref: 9b17b5efd45d89f65447f2bff704f05ba8bb6776
 # Profile: hlhd-docker
 # This .stagefreight.yml is governed, not purely local.
 # To disable governance, detach from the control repo workflow.
@@ -12,9 +12,9 @@ version: 1
 builds:
   image:
     build_args:
-      FRAPPE_BRANCH: version-15
-      NODE_VERSION: 22.22.0
-      PYTHON_VERSION: 3.12.12
+      FRAPPE_BRANCH: version-16
+      NODE_VERSION: 24.13.0
+      PYTHON_VERSION: 3.14.2
     context: frappe_docker
     dockerfile: frappe_docker/images/custom/Containerfile
     kind: docker
@@ -104,7 +104,17 @@ orgs:
       handle: hlhd
     maintainer: HomeLabHD <homelabhelp@gmail.com>
 publish:
+  dev:
+    tags:
+      - dev-{sha:8}
+      - latest-dev
+      - latest-v16-dev
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/publish-docker.yml
+  stable:
+    tags:
+      - v{version}
+      - latest
+      - latest-v16
 registries:
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/registries.yml
 repos:
