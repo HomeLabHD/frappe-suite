@@ -26,14 +26,15 @@ for `frappe/erpnext` that carries the whole set.
 | app | what it gives you |
 |-----|-------------------|
 | `frappe` | the framework the rest runs on |
-| `erpnext` | ERP and CRM — lead → opportunity → quotation → customer |
+| `erpnext` | ERP: accounting, stock, buying, selling, projects |
 | `hrms` | HR: employees, leave, attendance, payroll |
 | `helpdesk` | ticketing |
+| `crm` | the standalone CRM — pipeline, deals, contacts, its own UI. Distinct from ERPNext's built-in CRM module, which is lead → quotation → customer inside the desk |
 | `telephony` | Exotel/Twilio call integration; `helpdesk` requires it |
 
 Built on the **v16** line. Everything that publishes a `version-16` branch tracks it, so
 framework and app patches arrive without an edit here. `helpdesk` and `telephony` publish
-no version branches at all — they track `main` and `develop`, which is what upstream's own
+no version branches at all — `helpdesk` and `crm` track `main`, `telephony` tracks `develop`, which is what upstream's own
 install instructions name.
 
 ## Use it
