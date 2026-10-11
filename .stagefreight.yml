@@ -83,7 +83,7 @@ metadata:
   category: applications
   description:
     - ERPNext with HR, CRM, and helpdesk, built as one container image.
-    - Frappe bench image bundling ERPNext, HRMS, telephony, and helpdesk on the v15 framework.
+    - Frappe bench image bundling ERPNext, HRMS, CRM, telephony, and helpdesk.
   license: GPL-3.0
   org: HomeLabHD
   title: Frappe Bench
