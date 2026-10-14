@@ -11,7 +11,7 @@ version: 1
 builds:
   image:
     build_args:
-      FRAPPE_BRANCH: version-16
+      FRAPPE_BRANCH: v16.51.0
       NODE_VERSION: 24.13.0
       PYTHON_VERSION: 3.14.2
     context: frappe_docker
