@@ -22,6 +22,8 @@ for `frappe/erpnext` that carries the whole set.
 <!-- sf:contents-base:start -->
 [![python 3.14.2](https://img.shields.io/badge/python-3.14.2-0078D4?style=flat)](https://hub.docker.com/_/python)
 <!-- sf:contents-base:end -->
+<!-- sf:contents-apps:start -->
+<!-- sf:contents-apps:end -->
 
 | app | what it gives you |
 |-----|-------------------|
