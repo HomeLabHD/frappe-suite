@@ -22,6 +22,14 @@ builds:
     secrets:
       apps_json: apps.json
 scribe:
+  files:
+    readme.contents.apps:
+      between:
+        - <!-- sf:contents-apps:start -->
+        - <!-- sf:contents-apps:end -->
+      file: README.md
+      items:
+        - contents-apps
   preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/scribe-docker.yml
 lint:
   modules:
@@ -110,6 +118,18 @@ repos:
       - primary
     worktree: .
 stencils:
+  contents-apps:
+    build: image
+    include:
+      - frappe
+      - erpnext
+      - hrms
+      - crm
+      - helpdesk
+      - telephony
+    render: badges
+    section: detected.pip
+    type: contents
   presets:
     - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-base.yml
     - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-status.yml
