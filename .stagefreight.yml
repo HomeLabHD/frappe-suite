@@ -30,7 +30,7 @@ scribe:
       file: README.md
       items:
         - contents-apps
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/scribe-docker.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/scribe-docker.yml
 lint:
   modules:
     freshness:
@@ -39,28 +39,28 @@ lint:
     vulnerabilities:
       exclude:
         - frappe_docker/docs/**
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/lint-generic.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/lint-generic.yml
 security:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/security.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/security.yml
 dependency:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/dependency.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/dependency.yml
 commit:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/commit.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/commit.yml
 release:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/release.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/release.yml
 manifest:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/manifest.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/manifest.yml
 build_cache:
   mode: local
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/build_cache.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/build_cache.yml
 ci:
   forge:
     - gitlab
   image: docker.cr.pcfae.com/prplanit/stagefreight:latest-dev
 forges:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/forges.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/forges.yml
 git:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/git.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/git.yml
   submodules: true
 metadata:
   category: applications
@@ -91,14 +91,14 @@ publish:
       - dev-{sha:8}
       - latest-dev
       - latest-v16-dev
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/publish-docker.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/publish-docker.yml
   stable:
     tags:
       - v{version}
       - latest
       - latest-v16
 registries:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/registries.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/registries.yml
 repos:
   github-mirror:
     forge: github
@@ -131,11 +131,11 @@ stencils:
     section: detected.pip
     type: contents
   presets:
-    - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-base.yml
-    - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-status.yml
-    - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/stencils-docker.yml
+    - https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/stencils-base.yml
+    - https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/stencils-status.yml
+    - https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/stencils-docker.yml
 toolchains:
-  preset: https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/toolchains.yml
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/toolchains.yml
   want:
     presets:
-      - https://gitlab.prplanit.com/PrPlanIT/MaintenancePolicy//preset/toolchains-scanners.yml
+      - https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/toolchains-scanners.yml
