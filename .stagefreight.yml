@@ -117,6 +117,8 @@ repos:
     roles:
       - primary
     worktree: .
+schedules:
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/schedules-upstream.yml
 stencils:
   contents-apps:
     build: image
@@ -139,3 +141,33 @@ toolchains:
   want:
     presets:
       - https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/toolchains-scanners.yml
+upstream:
+  evidence:
+    image:
+      probe:
+        manager: pip
+        package: erpnext
+  sources:
+    crm:
+      git: https://github.com/frappe/crm
+      pins:
+        - file: apps.json
+          path: 4.branch
+    erpnext:
+      git: https://github.com/frappe/erpnext
+      pins:
+        - file: apps.json
+          path: 0.branch
+    helpdesk:
+      git: https://github.com/frappe/helpdesk
+      pins:
+        - file: apps.json
+          path: 3.branch
+    hrms:
+      git: https://github.com/frappe/hrms
+      pins:
+        - file: apps.json
+          path: 1.branch
+  version:
+    since: v16.50.0
+    track: erpnext
