@@ -21,6 +21,7 @@ builds:
       - linux/amd64
     secrets:
       apps_json: apps.json
+  preset: https://git.optcp.com/PrPlanIT/MaintenancePolicy//preset/build-docker.yml
 scribe:
   files:
     readme.contents.apps:
@@ -144,9 +145,8 @@ toolchains:
 upstream:
   evidence:
     image:
-      probe:
-        manager: pip
-        package: erpnext
+      manager: pip
+      package: erpnext
   sources:
     crm:
       git: https://github.com/frappe/crm
